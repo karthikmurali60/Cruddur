@@ -46,7 +46,7 @@ aws sts get-caller-identity
 
 ### Install AWS CLI
 
-I followed the offical [AWS Documentation](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) for installing CLI on GitPod. The following commands were used to install the CLI -
+I followed the offical [AWS Documentation](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) for installing CLI on GitPod. The following commands were added to the [.gitpod.yml](../.gitpod.yml) file so that for each session, the CLI will automatically be installed.
 ```
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
