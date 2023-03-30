@@ -1,7 +1,12 @@
 from datetime import datetime, timedelta, timezone
+from aws_xray_sdk.core import xray_recorder
+from aws_xray_sdk.ext.flask.middleware import XRayMiddleware
+
+
 class NotificationsActivities:
   def run():
     now = datetime.now(timezone.utc).astimezone()
+
     results = [{
       'uuid': '68f126b0-1ceb-4a33-88be-d90fa7109eee',
       'handle':  'Karthik Muraliprasad',
@@ -32,4 +37,15 @@ class NotificationsActivities:
       'replies': []
     },
     ]
+
+    # subsegment = xray_recorder.begin_segment('notifications-activities-mock-data')
+
+    # data = {
+    #   "now": now.isoformat(),
+    #   "results-size": len(results)
+    # }
+
+    # subsegment.put_metadata('key', data, 'metadata')
+    # xray_recorder.end_subsegment()
+
     return results
