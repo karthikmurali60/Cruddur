@@ -1,5 +1,6 @@
 import uuid
 from datetime import datetime, timedelta, timezone
+
 class CreateReply:
   def run(message, user_handle, activity_uuid):
     model = {
@@ -21,7 +22,7 @@ class CreateReply:
     if model['errors']:
       # return what we provided
       model['data'] = {
-        'display_name': 'Andrew Brown',
+        'display_name': 'Karthik Muraliprasad',
         'handle':  user_sender_handle,
         'message': message,
         'reply_to_activity_uuid': activity_uuid
@@ -30,7 +31,7 @@ class CreateReply:
       now = datetime.now(timezone.utc).astimezone()
       model['data'] = {
         'uuid': uuid.uuid4(),
-        'display_name': 'Andrew Brown',
+        'display_name': 'Karthik Muraliprasad',
         'handle':  user_handle,
         'message': message,
         'created_at': now.isoformat(),
