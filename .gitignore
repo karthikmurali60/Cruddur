@@ -2,3 +2,6 @@
 __pycache__
 .DS_Store
 docker/**/*
+package-lock.json
+frontend-react-js/build/*
+*.deb
