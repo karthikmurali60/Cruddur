@@ -42,8 +42,8 @@
       "environment": [
         {"name": "OTEL_SERVICE_NAME", "value": "backend-flask"},
         {"name": "OTEL_EXPORTER_OTLP_ENDPOINT", "value": "https://api.honeycomb.io"},
-        {"name": "AWS_COGNITO_USER_POOL_ID", "value": "us-east-1_DmMbpWw8a"},
-        {"name": "AWS_COGNITO_USER_POOL_CLIENT_ID", "value": "17qts8vvh0a2o85ki333vvl2ql"},
+        {"name": "AWS_COGNITO_USER_POOL_ID", "value": "us-east-1_UYH262Kb6"},
+        {"name": "AWS_COGNITO_USER_POOL_CLIENT_ID", "value": "638nditervohvm82j2mek38eor"},
         {"name": "FRONTEND_URL", "value": "https://crudder.click"},
         {"name": "BACKEND_URL", "value": "https://api.crudder.click"},
         {"name": "AWS_DEFAULT_REGION", "value": "us-east-1"}
