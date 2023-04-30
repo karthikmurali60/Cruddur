@@ -1,13 +1,14 @@
 #! /usr/bin/bash
+
 if [ -z "$1" ]; then
   echo "No TASK_ID argument supplied."
-  echo "Use this command to get TASK_ID"
+  echo "Use below command to get TASK_ID"
   echo "aws ecs list-tasks --cluster cruddur"
   exit 1
 fi
-TASK_ID=$1
 
-CONTAINER_NAME=frontend-react-js
+TASK_ID=$1
+CONTAINER_NAME=backend-flask
 
 echo "TASK ID : $TASK_ID"
 echo "Container Name: $CONTAINER_NAME"
@@ -17,5 +18,5 @@ aws ecs execute-command  \
 --cluster cruddur \
 --task $TASK_ID \
 --container $CONTAINER_NAME \
---command "/bin/sh" \
+--command "/bin/bash" \
 --interactive

@@ -12,8 +12,7 @@ try:
     exit(1)
 
 # This for some reason is not capturing the error....
-#except ConnectionRefusedError as e:
-
+# except ConnectionRefusedError as e:
 # so we'll just catch on all even though this is a bad practice
 except Exception as e:
   print(e)
