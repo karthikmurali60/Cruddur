@@ -5,3 +5,4 @@ docker/**/*
 package-lock.json
 frontend-react-js/build/*
 *.deb
+*.env
