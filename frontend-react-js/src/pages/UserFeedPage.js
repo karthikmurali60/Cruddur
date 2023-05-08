@@ -7,7 +7,7 @@ import DesktopSidebar     from '../components/DesktopSidebar';
 import ActivityFeed from '../components/ActivityFeed';
 import ActivityForm from '../components/ActivityForm';
 
-import checkAuth from '../lib/CheckAuth';
+import {checkAuth, getAccessToken} from '../lib/CheckAuth';
 
 export default function UserFeedPage() {
   const [activities, setActivities] = React.useState([]);
@@ -21,7 +21,13 @@ export default function UserFeedPage() {
   const loadData = async () => {
     try {
       const backend_url = `${process.env.REACT_APP_BACKEND_URL}/api/activities/${title}`
+      await getAccessToken()
+      const access_token = localStorage.getItem("access_token")
+
       const res = await fetch(backend_url, {
+        headers: {
+          Authorization: `Bearer ${access_token}`
+        },
         method: "GET"
       });
       let resJson = await res.json();
@@ -48,7 +54,7 @@ export default function UserFeedPage() {
     <article>
       <DesktopNavigation user={user} active={'profile'} setPopped={setPopped} />
       <div className='content'>
-        <ActivityForm popped={popped} setActivities={setActivities} />
+        <ActivityForm user_handle={user} popped={popped} setActivities={setActivities} />
         <ActivityFeed title={title} activities={activities} />
       </div>
       <DesktopSidebar user={user} />
