@@ -1,4 +1,0 @@
-#! /usr/bin/bash
-
-aws s3 rm "s3://assets.crudder.click/avatars/original/data.jpg"
-aws s3 rm "s3://assets.crudder.click/avatars/processed/data.jpg"
