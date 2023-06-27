@@ -2,11 +2,12 @@ import './UserFeedPage.css';
 import React from "react";
 import { useParams } from 'react-router-dom';
 
-import DesktopNavigation  from '../components/DesktopNavigation';
-import DesktopSidebar     from '../components/DesktopSidebar';
-import ActivityFeed from '../components/ActivityFeed';
-import ActivityForm from '../components/ActivityForm';
-import ProfileHeading from '../components/ProfileHeading';
+import DesktopNavigation  from 'components/DesktopNavigation';
+import DesktopSidebar     from 'components/DesktopSidebar';
+import ActivityFeed from 'components/ActivityFeed';
+import ActivityForm from 'components/ActivityForm';
+import ProfileHeading from 'components/ProfileHeading';
+import ProfileForm from 'components/ProfileForm';
 
 import {checkAuth, getAccessToken} from '../lib/CheckAuth';
 
@@ -59,6 +60,11 @@ export default function UserFeedPage() {
       <DesktopNavigation user={user} active={'profile'} setPopped={setPopped} />
       <div className='content'>
         <ActivityForm user_handle={user} popped={popped} setActivities={setActivities} />
+        <ProfileForm 
+          profile={profile}
+          popped={poppedProfile} 
+          setPopped={setPoppedProfile} 
+        />
         <div className='activity_feed'>
           <ProfileHeading setPopped={setPoppedProfile} profile={profile} />
           <ActivityFeed activities={activities} />
