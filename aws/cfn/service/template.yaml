@@ -100,7 +100,6 @@ Resources:
       HealthCheckGracePeriodSeconds: 100
       LaunchType: FARGATE
       LoadBalancers:
-      # TODO - UPDATE THIS
         - TargetGroupArn:
             Fn::ImportValue:
               !Sub "${ClusterStack}BackendTGArn"
