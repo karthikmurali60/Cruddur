@@ -1,4 +1,4 @@
 [deploy]
-bucket = 'cfn-artifacts-eshwar'
+bucket = 'cfn-artifacts-karthik'
 region = 'us-east-1'
 stack_name = 'CrdSrvBackendFlask'

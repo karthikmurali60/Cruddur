@@ -33,7 +33,7 @@ Parameters:
     Default: backend-flask
   EcrImage:
     Type: String
-    Default: '${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/backend-flask'
+    Default: '922791828718.dkr.ecr.us-east-1.amazonaws.com/backend-flask'
   EnvOtelServiceName:
     Type: String
     Default: backend-flask
@@ -54,19 +54,19 @@ Parameters:
     Default: "*"
   SecretsAWSAccessKeyId:
     Type: String
-    Default: 'arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/cruddur/backend-flask/AWS_ACCESS_KEY_ID'
+    Default: 'arn:aws:ssm:us-east-1:922791828718:parameter/cruddur/backend-flask/AWS_ACCESS_KEY_ID'
   SecretsSecretAccessKey:
     Type: String
-    Default: 'arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/cruddur/backend-flask/AWS_SECRET_ACCESS_KEY'
+    Default: 'arn:aws:ssm:us-east-1:922791828718:parameter/cruddur/backend-flask/AWS_SECRET_ACCESS_KEY'
   SecretsConnectionUrl:
     Type: String
-    Default: 'arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/cruddur/backend-flask/CONNECTION_URL'
+    Default: 'arn:aws:ssm:us-east-1:922791828718:parameter/cruddur/backend-flask/PROD_CONNECTION_URL'
   SecretsRollbarAccessToken:
     Type: String
-    Default: 'arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/cruddur/backend-flask/ROLLBAR_ACCESS_TOKEN'
+    Default: 'arn:aws:ssm:us-east-1:922791828718:parameter/cruddur/backend-flask/ROLLBAR_ACCESS_TOKEN'
   SecretsOtelExporterOltpHeaders:
     Type: String
-    Default: 'arn:aws:ssm:${AWS::Region}:${AWS::AccountId}:parameter/cruddur/backend-flask/OTEL_EXPORTER_OTLP_HEADERS'
+    Default: 'arn:aws:ssm:us-east-1:922791828718:parameter/cruddur/backend-flask/OTEL_EXPORTER_OTLP_HEADERS'
 Resources:
   FargateService:
   # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-service.html
@@ -80,7 +80,7 @@ Resources:
       DesiredCount: 1
       EnableECSManagedTags: true
       EnableExecuteCommand: true
-      HealthCheckGracePeriodSeconds: 100
+      HealthCheckGracePeriodSeconds: 0
       LaunchType: FARGATE
       LoadBalancers:
         - TargetGroupArn:
@@ -118,7 +118,6 @@ Resources:
       #    ContainerPort: !Ref ContainerPort
       ServiceName: !Ref ServiceName
       TaskDefinition: !Ref TaskDefinition
-
   TaskDefinition:
     # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ecs-taskdefinition.html
     Type: 'AWS::ECS::TaskDefinition'
@@ -148,7 +147,7 @@ Resources:
               - 'CMD-SHELL'
               - 'python /backend-flask/bin/health-check'
             Interval: 30
-            Timeout: 5
+            Timeout: 6
             Retries: 3
             StartPeriod: 60
           PortMappings:
@@ -182,7 +181,7 @@ Resources:
               ValueFrom: !Ref SecretsAWSAccessKeyId
             - Name: 'AWS_SECRET_ACCESS_KEY'
               ValueFrom: !Ref SecretsSecretAccessKey
-            - Name: 'CONNECTION_URL'
+            - Name: 'PROD_CONNECTION_URL'
               ValueFrom: !Ref SecretsConnectionUrl
             - Name: 'ROLLBAR_ACCESS_TOKEN'
               ValueFrom: !Ref SecretsRollbarAccessToken
@@ -251,3 +250,8 @@ Resources:
       ManagedPolicyArns:
         - arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
         - arn:aws:iam::aws:policy/AWSXRayDaemonWriteAccess
+Outputs:
+  ServiceName:
+    Value: !GetAtt FargateService.Name
+    Export:
+      Name: !Sub "${AWS::StackName}ServiceName"

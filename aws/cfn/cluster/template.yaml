@@ -53,19 +53,19 @@ Parameters:
     Default: 4567
   BackendHealthCheckIntervalSeconds:
     Type: String
-    Default: 15
+    Default: 30
   BackendHealthCheckPath:
     Type: String
     Default: "/api/health-check"
   BackendHealthCheckPort:
     Type: String
-    Default: 80
+    Default: 4567
   BackendHealthCheckProtocol:
     Type: String
     Default: HTTP
   BackendHealthCheckTimeoutSeconds:
     Type: Number
-    Default: 5
+    Default: 15
   BackendHealthyThresholdCount:
     Type: Number
     Default: 2
@@ -82,7 +82,7 @@ Resources:
         - FARGATE
       ClusterSettings:
         - Name: containerInsights
-          Value: enabled
+          Value: disabled
       Configuration:
         ExecuteCommandConfiguration:
           # KmsKeyId: !Ref KmsKeyId
@@ -196,8 +196,8 @@ Resources:
       SecurityGroupIngress:
         - IpProtocol: tcp
           SourceSecurityGroupId: !GetAtt ALBSG.GroupId
-          FromPort: 80
-          ToPort: 80
+          FromPort: !Ref BackendPort
+          ToPort: !Ref BackendPort
           Description: ALB HTTP
   BackendTG:
     # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-elasticloadbalancingv2-targetgroup.html
