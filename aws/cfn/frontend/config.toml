@@ -1,0 +1,9 @@
+[deploy]
+bucket = 'cfn-artifacts-karthik'
+region = 'us-east-1'
+stack_name = 'CrdFrontend'
+
+[parameters]
+CertificateArn = 'arn:aws:acm:us-east-1:922791828718:certificate/c2d13846-4edf-47d2-951c-cd9414fcd020'
+WwwBucketName = 'www.crudder.click'
+RootBucketName = 'crudder.click'
