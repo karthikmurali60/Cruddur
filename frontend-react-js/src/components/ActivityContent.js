@@ -3,6 +3,7 @@ import './ActivityContent.css';
 import { Link } from "react-router-dom";
 import { format_datetime, time_ago } from '../lib/DateTimeFormats';
 import {ReactComponent as BombIcon} from './svg/bomb.svg';
+import ProfileAvatar from 'components/ProfileAvatar'
 
 export default function ActivityContent(props) {
   let expires_at;
@@ -16,7 +17,7 @@ export default function ActivityContent(props) {
 
   return (
     <div className='activity_content_wrap'>
-      <div className='activity_avatar'></div>
+      <div className='activity_avatar'><ProfileAvatar id={props.id} /></div>
       <div className='activity_content'>
         <div className='activity_meta'>
           <Link className='activity_identity' to={`/@`+props.activity.handle}>

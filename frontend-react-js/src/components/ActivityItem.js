@@ -24,7 +24,7 @@ export default function ActivityItem(props) {
 
   return (
     <div className='activity_item'>
-      <ActivityContent activity={props.activity} />
+      <ActivityContent activity={props.activity} id={props.user.cognito_user_uuid} />
       <div className="activity_actions">
         <ActivityActionReply setReplyActivity={props.setReplyActivity} activity={props.activity} setPopped={props.setPopped} activity_uuid={props.activity.uuid} count={props.activity.replies_count}/>
         <ActivityActionRepost activity_uuid={props.activity.uuid} count={props.activity.reposts_count}/>
