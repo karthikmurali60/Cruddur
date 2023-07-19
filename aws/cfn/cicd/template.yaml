@@ -87,9 +87,10 @@ Resources:
                 ClusterName:
                   Fn::ImportValue:
                     !Sub ${ClusterStack}ClusterName
-                ServiceName:
-                  Fn::ImportValue:
-                    !Sub ${ServiceStack}ServiceName
+                # This is done to remove CI/CD CFN template dependency on backend service CFN template
+                ServiceName: backend-flask
+                  # Fn::ImportValue:
+                  #   !Sub ${ServiceStack}ServiceName
   CodePipelineRole:
     Type: AWS::IAM::Role
     Properties:
