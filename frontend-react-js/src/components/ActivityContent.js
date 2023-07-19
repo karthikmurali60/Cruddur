@@ -9,7 +9,7 @@ export default function ActivityContent(props) {
   if (props.activity.expires_at) {
     expires_at =  <div className="expires_at" title={format_datetime(props.activity.expires_at)}>
                     <BombIcon className='icon' />
-                    <span className='ago'>{time_ago(props.activity.expires_at, true)}</span>
+                    <span className='ago'>{time_ago(props.activity.expires_at, false)}</span>
                   </div>
 
   }
@@ -25,7 +25,7 @@ export default function ActivityContent(props) {
           </Link>{/* activity_identity */}
           <div className='activity_times'>
           <div className="created_at" title={format_datetime(props.activity.created_at)}>
-              <span className='ago'>{time_ago(props.activity.created_at, false)}</span> 
+              <span className='ago'>{time_ago(props.activity.created_at, true)}</span> 
             </div>
             {expires_at}
           </div>{/* activity_times */}
