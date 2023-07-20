@@ -13,5 +13,6 @@ REACT_APP_BACKEND_URL="https://api.crudder.click" \
 REACT_APP_AWS_PROJECT_REGION="$AWS_DEFAULT_REGION" \
 REACT_APP_AWS_COGNITO_REGION="$AWS_DEFAULT_REGION" \
 REACT_APP_AWS_USER_POOLS_ID="us-east-1_UYH262Kb6" \
+REACT_APP_API_GATEWAY_ENDPOINT_URL="https://5qn4bpld4i.execute-api.us-east-1.amazonaws.com" \
 REACT_APP_CLIENT_ID="638nditervohvm82j2mek38eor" \
 npm run build
