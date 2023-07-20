@@ -1,11 +1,15 @@
 import os
 import time
 import requests
+
 from jose import jwk, jwt
 from jose.exceptions import JOSEError
 from jose.utils import base64url_decode
 from functools import wraps, partial
+
 from flask import request, g
+from flask import current_app as app
+
 from functools import wraps, partial
 
 class FlaskAWSCognitoError(Exception):
