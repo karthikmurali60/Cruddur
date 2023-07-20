@@ -29,5 +29,5 @@ SELECT
   ) array_row) as replies
 FROM public.activities
 LEFT JOIN public.users ON users.uuid = activities.user_uuid
-WHERE activities.reply_to_activity_uuid IS NULL
+WHERE activities.expires_at > now() AND activities.reply_to_activity_uuid IS NULL 
 ORDER BY activities.created_at DESC
