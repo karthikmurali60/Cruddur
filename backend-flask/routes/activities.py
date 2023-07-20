@@ -51,8 +51,8 @@ def load(app):
     return model_json(model)
 
   @app.route("/api/activities/<string:activity_uuid>/reply", methods=['POST','OPTIONS'])
-  @jwt_required()
   @cross_origin()
+  @jwt_required()
   def data_activities_reply(activity_uuid):
     message = request.json['message']
     model = CreateReply.run(message, g.cognito_user_id, activity_uuid)
