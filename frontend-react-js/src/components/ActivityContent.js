@@ -17,7 +17,7 @@ export default function ActivityContent(props) {
 
   return (
     <div className='activity_content_wrap'>
-      <Link className='activity_avatar'to={`/@`+props.activity.handle} ><ProfileAvatar id={props.id} /></Link>
+      <div className='activity_avatar'><ProfileAvatar id={props.activity.cognito_user_uuid} /></div>
       <div className='activity_content'>
         <div className='activity_meta'>
           <div className='activity_identity' >
