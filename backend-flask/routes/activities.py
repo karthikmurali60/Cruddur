@@ -54,7 +54,6 @@ def load(app):
   @jwt_required()
   @cross_origin()
   def data_activities_reply(activity_uuid):
-    user_handle  = 'andrewbrown'
     message = request.json['message']
     model = CreateReply.run(message, g.cognito_user_id, activity_uuid)
     return model_json(model)
