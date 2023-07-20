@@ -19,7 +19,8 @@ SELECT
     replies.reposts_count,
     replies.likes_count,
     replies.reply_to_activity_uuid,
-    replies.created_at
+    replies.created_at,
+    reply_users.cognito_user_id as cognito_user_uuid
   FROM public.activities replies
   LEFT JOIN public.users reply_users ON reply_users.uuid = replies.user_uuid
   WHERE
