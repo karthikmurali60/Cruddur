@@ -8,6 +8,20 @@ import ActivityActionLike  from '../components/ActivityActionLike';
 import ActivityActionShare  from '../components/ActivityActionShare';
 
 export default function ActivityItem(props) {
+  let replies;
+  if (props.activity.replies) {
+    replies = <div className="replies">
+                {props.activity.replies.map(reply => {
+                return  <ActivityItem 
+                  setReplyActivity={props.setReplyActivity} 
+                  setPopped={props.setPopped} 
+                  key={reply.uuid} 
+                  activity={reply} 
+                  />
+                })}
+              </div>
+  }
+
   const navigate = useNavigate()
 
   const click = (event) => {
@@ -32,6 +46,7 @@ export default function ActivityItem(props) {
           <ActivityActionShare activity_uuid={props.activity.uuid} />
         </div>
       </div>
+      {replies}
     </div>
-  )
+  );
 }
