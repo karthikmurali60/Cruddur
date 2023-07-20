@@ -10,7 +10,6 @@ export function message_time_ago(value){
   const datetime = DateTime.fromISO(value, { zone: 'utc' })
   const created = datetime.setZone(Intl.DateTimeFormat().resolvedOptions().timeZone);
   const now     = DateTime.now()
-  console.log('message_time_group',created,now)
   const diff_mins = now.diff(created, 'minutes').toObject().minutes;
   const diff_hours = now.diff(created, 'hours').toObject().hours;
 
@@ -26,7 +25,24 @@ export function message_time_ago(value){
   }
 }
 
-export function time_ago(value, flip){
+export function time_ago(value){
+  const datetime = DateTime.fromISO(value, { zone: 'utc' })
+  const past = datetime.setZone(Intl.DateTimeFormat().resolvedOptions().timeZone);
+  const now     = DateTime.now()
+  const diff_mins = now.diff(past, 'minutes').toObject().minutes;
+  const diff_hours = now.diff(past, 'hours').toObject().hours;
+  const diff_days = now.diff(past, 'days').toObject().days;
+
+  if (diff_hours > 24.0){
+    return `${Math.floor(diff_days)}d`;
+  } else if (diff_hours < 24.0 && diff_hours > 1.0) {
+    return `${Math.floor(diff_hours)}h`;
+  } else if (diff_hours < 1.0) {
+    return `${Math.round(diff_mins)}m`;
+  }
+}
+
+export function time_future(value){
   const datetime = DateTime.fromISO(value, { zone: 'utc' })
   const future = datetime.setZone(Intl.DateTimeFormat().resolvedOptions().timeZone);
   const now     = DateTime.now()
@@ -34,21 +50,11 @@ export function time_ago(value, flip){
   const diff_hours = future.diff(now, 'hours').toObject().hours;
   const diff_days = future.diff(now, 'days').toObject().days;
 
-  if(flip) {
-    if (diff_hours > 24.0){
-      return `${Math.floor(-1 * diff_days)}d`;
-    } else if (diff_hours < 24.0 && diff_hours > 1.0) {
-      return `${Math.floor(-1 * diff_hours)}h`;
-    } else if (diff_hours < 1.0) {
-      return `${Math.round(-1 * diff_mins)}m`;
-    }
-  } else {
-    if (diff_hours > 24.0){
-      return `${Math.floor(diff_days)}d ago`;
-    } else if (diff_hours < 24.0 && diff_hours > 1.0) {
-      return `${Math.floor(diff_hours)}h ago`;
-    } else if (diff_hours < 1.0) {
-      return `${Math.round(diff_mins)}m ago`;
-    }
+  if (diff_hours > 24.0){
+    return `${Math.floor(diff_days)}d`;
+  } else if (diff_hours < 24.0 && diff_hours > 1.0) {
+    return `${Math.floor(diff_hours)}h`;
+  } else if (diff_hours < 1.0) {
+    return `${Math.round(diff_mins)}m`;
   }
 }
