@@ -6,3 +6,4 @@ stack_name = 'CrdSrvBackendFlask'
 [parameters]
 EnvFrontendUrl = 'https://crudder.click'
 EnvBackendUrl = 'https://api.crudder.click'
+DDBMessageTable = 'CrdDdb-DynamoDBTable-AO3T5YLGQKXI'
