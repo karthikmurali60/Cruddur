@@ -1,43 +1,43 @@
-name: Daily CRUD Deletion
+# name: Daily CRUD Deletion
 
-on:
-  schedule:
-    - cron: '0 22 * * *'  # Runs every day at 10 PM UTC
-  workflow_dispatch:
+# on:
+#   schedule:
+#     - cron: '0 22 * * *'  # Runs every day at 10 PM UTC
+#   workflow_dispatch:
 
-jobs:
-  delete_records:
-    name: Delete CRUDs
-    runs-on: ubuntu-latest
-    # These permissions are needed to interact with GitHub's OIDC Token endpoint.
-    permissions:
-      id-token: write
-      contents: read
+# jobs:
+#   delete_records:
+#     name: Delete CRUDs
+#     runs-on: ubuntu-latest
+#     # These permissions are needed to interact with GitHub's OIDC Token endpoint.
+#     permissions:
+#       id-token: write
+#       contents: read
 
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+#     steps:
+#     - name: Checkout
+#       uses: actions/checkout@v3
 
-    - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v2
-      with:
-        role-to-assume: arn:aws:iam::922791828718:role/CrudDeleteCronRole
-        aws-region: us-east-1
+#     - name: Configure AWS credentials
+#       uses: aws-actions/configure-aws-credentials@v2
+#       with:
+#         role-to-assume: arn:aws:iam::922791828718:role/CrudDeleteCronRole
+#         aws-region: us-east-1
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
+#     - name: Set up Python
+#       uses: actions/setup-python@v2
+#       with:
+#         python-version: '3.x'
 
-    - name: Install dependencies
-      run: |
-        pip install psycopg2-binary
-        pip install psycopg2
+#     - name: Install dependencies
+#       run: |
+#         pip install psycopg2-binary
+#         pip install psycopg2
 
-    - name: Run Python script
-      env:
-          DB_ENDPOINT: ${{ secrets.DB_ENDPOINT }}
-          DB_NAME: ${{ secrets.DB_NAME }}
-          DB_USER: ${{ secrets.DB_USER }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-      run: python bin/rds/delete_records.py
+#     - name: Run Python script
+#       env:
+#           DB_ENDPOINT: ${{ secrets.DB_ENDPOINT }}
+#           DB_NAME: ${{ secrets.DB_NAME }}
+#           DB_USER: ${{ secrets.DB_USER }}
+#           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+#       run: python bin/rds/delete_records.py
